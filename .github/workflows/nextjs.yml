@@ -37,7 +37,8 @@ jobs:
         run: pnpm install --filter frontend
 
       - name: Build and export Next.js
-        run: pnpm run build && pnpm run export --filter frontend
+        working-directory: ./frontend
+        run: pnpm run build && pnpm run export
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
