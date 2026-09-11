@@ -24,15 +24,15 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 9 # última versión estable
-
+          version: 9
+      
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: "24"
           cache: pnpm
           cache-dependency-path: './frontend/pnpm-lock.yaml'
-
+      
       - name: Install dependencies
         working-directory: ./frontend
         run: pnpm install
