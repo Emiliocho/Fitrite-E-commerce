@@ -1,7 +1,5 @@
 {
   "private": true,
   "name": "fitrite-monorepo",
-  "workspaces": {
-    "packages": ["frontend"]
-  }
+  "packageManager": "pnpm@12.4.1"
 }
