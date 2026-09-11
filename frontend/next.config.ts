@@ -2,7 +2,8 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: "export",
-  basePath: '/Fitrite-E-commerce',
+  basePath: '/frontend',
+  assetPrefix: '/frontend/',
 };
 
 export default nextConfig;
