@@ -34,12 +34,10 @@ jobs:
           cache-dependency-path: './frontend/pnpm-lock.yaml'
       
       - name: Install dependencies
-        working-directory: ./frontend
-        run: pnpm install
+        run: pnpm install --filter frontend
 
       - name: Build and export Next.js
-        working-directory: ./frontend
-        run: pnpm run build && pnpm run export
+        run: pnpm run build && pnpm run export --filter frontend
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
