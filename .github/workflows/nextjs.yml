@@ -1,57 +1,27 @@
-name: Deploy Next.js site to Pages
+steps:
+  - name: Checkout
+    uses: actions/checkout@v4
 
-on:
-  push:
-    branches: ["main"]
-  workflow_dispatch:
+  - name: Setup pnpm
+    uses: pnpm/action-setup@v2
+    with:
+      version: 9
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+  - name: Setup Node
+    uses: actions/setup-node@v4
+    with:
+      node-version: "24"
+      cache: pnpm
 
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+  - name: Install dependencies
+    working-directory: ./frontend
+    run: pnpm install
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+  - name: Build and export Next.js
+    working-directory: ./frontend
+    run: pnpm run build && pnpm run export
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: "24"
-          cache: pnpm
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 9 # usa la última estable
-
-      - name: Install dependencies
-        working-directory: ./frontend
-        run: pnpm install
-
-      - name: Build and export Next.js
-        working-directory: ./frontend
-        run: pnpm run build && pnpm run export
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./frontend/out
-
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v5
+  - name: Upload artifact
+    uses: actions/upload-pages-artifact@v3
+    with:
+      path: ./frontend/out
