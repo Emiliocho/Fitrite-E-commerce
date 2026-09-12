@@ -1,9 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: "export",
-  basePath: '/frontend',
-  assetPrefix: '/frontend/',
+  /* config options here */
+  allowedDevOrigins: ["192.168.1.26", "192.168.1.*"],
 };
 
 export default nextConfig;
