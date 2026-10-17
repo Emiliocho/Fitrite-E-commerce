@@ -8,8 +8,11 @@
 
   <ItemGroup>
     <Folder Include="DTOs\" />
-    <Folder Include="Interfaces\" />
     <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Fitrite.Domain\Fitrite.Domain.csproj" />
   </ItemGroup>
 
 </Project>
