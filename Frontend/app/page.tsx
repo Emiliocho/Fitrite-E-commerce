@@ -33,17 +33,17 @@ export default function HomePage() {
             </button>
             <div className="h-6 w-[1px] bg-surface-container-highest hidden sm:block" />
             <div className="hidden sm:flex items-center gap-2">
-              <Link href="#" className="px-3 py-2 text-sm text-on-surface-variant hover:text-on-surface transition-colors">
+              <Link href="/login" className="px-3 py-2 text-sm text-on-surface-variant hover:text-on-surface transition-colors">
                 Iniciar Sesión
               </Link>
-              <Link href="#" className="px-4 py-2 bg-secondary text-white text-xs font-bold rounded uppercase hover:bg-secondary-container transition-colors flex items-center gap-1.5">
+              <Link href="/login" className="px-4 py-2 bg-secondary text-white text-xs font-bold rounded uppercase hover:bg-secondary-container transition-colors flex items-center gap-1.5">
                 <span>Registrarse</span>
                 <span className="material-symbols-outlined text-[14px]">arrow_forward</span>
               </Link>
             </div>
-            <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white">
+            <Link href="/login" className="w-8 h-8 rounded-full bg-primary hover:bg-secondary transition-colors flex items-center justify-center text-white" title="Mi Cuenta / Iniciar Sesión">
               <span className="material-symbols-outlined text-[18px]">person</span>
-            </div>
+            </Link>
           </div>
         </div>
 

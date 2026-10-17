@@ -32,6 +32,22 @@
   /* Bordes y Líneas */
   --color-outline: #75777a;
   --color-outline-variant: #c5c6ca;
+
+  /* Terciarios y Extras */
+  --color-tertiary-fixed-dim: #a8c8ff;
+  --color-on-tertiary-container: #4184df;
+  --color-surface-variant: #e2e2e4;
+  --color-on-background: #1a1c1d;
+}
+
+.input-focus-ring:focus {
+  outline: none;
+  border-color: #4184df;
+  box-shadow: 0 0 0 2px rgba(65, 132, 223, 0.15);
+}
+
+.login-transition {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @media (prefers-color-scheme: dark) {
