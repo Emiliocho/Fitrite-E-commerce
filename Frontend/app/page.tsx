@@ -51,7 +51,7 @@ export default function HomePage() {
         <div className="bg-surface-container-low border-t border-surface-container">
           <div className="max-w-[1280px] mx-auto px-6 lg:px-12">
             <nav className="flex items-center gap-8 h-10 overflow-x-auto text-sm">
-              <Link href="#" className="text-on-surface font-semibold whitespace-nowrap">Marketplace</Link>
+              <Link href="/marketplace" className="text-on-surface font-semibold whitespace-nowrap hover:text-secondary transition-colors">Marketplace</Link>
               <Link href="#" className="text-on-surface-variant hover:text-on-surface whitespace-nowrap">Categorías</Link>
               <Link href="#" className="text-on-surface-variant hover:text-on-surface whitespace-nowrap">Marcas compatibles</Link>
               <Link href="#" className="text-on-surface-variant hover:text-on-surface whitespace-nowrap">Ofertas</Link>
