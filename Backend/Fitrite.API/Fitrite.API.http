@@ -1,0 +1,6 @@
+@Fitrite.API_HostAddress = http://localhost:5045
+
+GET {{Fitrite.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

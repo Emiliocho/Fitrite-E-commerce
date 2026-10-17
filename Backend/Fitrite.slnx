@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="Fitrite.API/Fitrite.API.csproj" />
+  <Project Path="Fitrite.Application/Fitrite.Application.csproj" />
+  <Project Path="Fitrite.Domain/Fitrite.Domain.csproj" />
+  <Project Path="Fitrite.Infrastructure/Fitrite.Infrastructure.csproj" />
+  <Project Path="Fitrite.Shared/Fitrite.Shared.csproj" />
+</Solution>
