@@ -3,6 +3,7 @@
 import React, { useState, FormEvent } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import {login} from "@/app/services/auth.service";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -17,41 +18,58 @@ export default function LoginPage() {
     text: string;
   } | null>(null);
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setStatusMessage(null);
+  const handleSubmit = async (
+  e: FormEvent<HTMLFormElement>
+) => {
+  e.preventDefault();
 
-    if (!email || !password) {
-      setStatusMessage({
-        type: "error",
-        text: "Por favor completa todos los campos requeridos.",
-      });
-      return;
-    }
+  setStatusMessage(null);
 
-    setIsLoading(true);
+  if (!email || !password) {
+    setStatusMessage({
+      type: "error",
+      text: "Por favor completa todos los campos requeridos.",
+    });
 
-    try {
-      // Simulación de autenticación (aquí se conectará con el endpoint del backend / API)
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+    return;
+  }
 
-      setStatusMessage({
-        type: "success",
-        text: "¡Inicio de sesión exitoso! Redirigiendo...",
-      });
+  setIsLoading(true);
 
-      setTimeout(() => {
-        router.push("/");
-      }, 1200);
-    } catch {
-      setStatusMessage({
-        type: "error",
-        text: "Error al iniciar sesión. Verifica tus credenciales.",
-      });
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  try {
+    const result = await login(
+      email,
+      password
+    );
+
+    localStorage.setItem(
+      "user",
+      JSON.stringify(result)
+    );
+
+    setStatusMessage({
+      type: "success",
+      text: "¡Inicio de sesión exitoso! Redirigiendo...",
+    });
+
+    setTimeout(() => {
+      router.push("/");
+    }, 1000);
+
+  } catch (error) {
+
+    setStatusMessage({
+      type: "error",
+      text:
+        error instanceof Error
+          ? error.message
+          : "Error al iniciar sesión.",
+    });
+
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   return (
     <div className="bg-background text-on-background font-sans overflow-hidden min-h-screen">

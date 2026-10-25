@@ -8,27 +8,57 @@ namespace Fitrite.Application.Services
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
+        public readonly ISecurityService _securityService;
 
-        public UserService(IUserRepository userRepository)
+        public UserService(IUserRepository userRepository, ISecurityService securityService)
         {
             _userRepository = userRepository;
+            _securityService = securityService;
         }
 
-        public async Task<User> CreateAsync(RegisterUser register, CancellationToken cancellationToken)
+        public async Task<User> RegisterAsync(RegisterUser register, CancellationToken cancellationToken)
         {
-             byte[] passwordHash = Encoding.UTF8.GetBytes(register.Password);
+            var existingUser = await _userRepository.GetByEmailAsync(register.Email, cancellationToken);
 
-            var user = new User
-                (
-                    email: register.Email,
-                    password: passwordHash,
-                    created_by: 1,
-                    created_at: DateTime.UtcNow,
-                    updated_by: 1,
-                    role_id: 4
-                );
+            if (existingUser != null)
+            {
+                throw new InvalidOperationException(
+                    "Email is already registered.");
+            }
 
-            return await _userRepository.AddAsync(user, cancellationToken);
+            var hashedPassword = _securityService.HashPassword(register.Password);
+
+            var newUser = new User(
+                register.Email,
+                hashedPassword,
+                4,
+                1,
+                DateTime.UtcNow,
+                1
+            );
+
+            return await _userRepository.AddAsync(
+                newUser,
+                cancellationToken);
+        }
+
+        public async Task<User> LoginUserAsync(LoginUser login, CancellationToken cancellationToken)
+        {
+            var user = await _userRepository.GetByEmailAsync(
+    login.Email,
+    cancellationToken);
+
+            if (user == null)
+            {
+                throw new InvalidOperationException(
+                    "Correo o contraseña incorrectos.");
+            }
+
+            Console.WriteLine($"UserId: {user.UserId}");
+            Console.WriteLine($"Email: {user.Email}");
+            Console.WriteLine($"PasswordHash: {user.PasswordHash}");
+            Console.WriteLine($"RoleId: {user.RoleId}");
+            return user;
         }
     }
 }
