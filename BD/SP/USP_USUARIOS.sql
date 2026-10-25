@@ -1,6 +1,6 @@
 CREATE OR ALTER PROC SEGURIDAD.USP_REGISTRAR_USUARIO(
     @i_correo   VARCHAR(50),
-    @i_password VARBINARY(MAX),
+    @i_password NVARCHAR(MAX),
     @i_rolId    INT = 4
 )
 AS
@@ -54,6 +54,10 @@ BEGIN
             @i_password,
             @i_rolId
         );
+
+        SELECT * FROM
+        SEGURIDAD.USUARIOS
+        WHERE usuario_id = SCOPE_IDENTITY();
 
         COMMIT TRAN;
 

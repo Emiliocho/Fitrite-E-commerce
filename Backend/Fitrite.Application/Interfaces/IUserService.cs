@@ -9,5 +9,6 @@ namespace Fitrite.Application.Interfaces
     public interface IUserService
     {
         Task<User> RegisterAsync(RegisterUser register, CancellationToken cancellationToken);
+        Task<User> LoginUserAsync(LoginUser login, CancellationToken cancellationToken);
     }
 }
