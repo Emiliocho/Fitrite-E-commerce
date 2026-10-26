@@ -32,16 +32,22 @@ builder.Services.AddCors(options =>
                 .AllowCredentials()
                 .WithOrigins(
                     "http://localhost:3000",
-                    "https://fitrite-auto-body-parts.netlify.app/",
+                    "https://fitrite-auto-body-parts.netlify.app",
                     "https://fitrite.runasp.net");
         });
 });
 
-var app = builder.Build();
-app.UseCors("NextJs");
-app.UseAuthentication();
-app.UseAuthorization();
-app.MapControllers();
+    var app = builder.Build();
+
+    app.UseHttpsRedirection();
+
+    app.UseCors("NextJs");
+
+    app.UseAuthorization();
+
+    app.MapControllers();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -50,8 +56,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.UseHttpsRedirection();
 
 var summaries = new[]
 {
