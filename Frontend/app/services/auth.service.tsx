@@ -1,4 +1,4 @@
-const API_URL = "https://localhost:7070/api/Login";
+const API_URL = "https://fitrite.runasp.net/api/Login";
 
 export async function login(
   email: string,
