@@ -33,6 +33,7 @@ builder.Services.AddCors(options =>
                 .WithOrigins(
                     "http://localhost:3000",
                     "https://fitrite-auto-body-parts.netlify.app",
+
                     "https://fitrite.runasp.net");
         });
 });
@@ -42,6 +43,8 @@ builder.Services.AddCors(options =>
     app.UseHttpsRedirection();
 
     app.UseCors("NextJs");
+
+    app.UseAuthentication();
 
     app.UseAuthorization();
 
