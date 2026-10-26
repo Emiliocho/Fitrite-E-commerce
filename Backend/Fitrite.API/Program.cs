@@ -31,12 +31,16 @@ builder.Services.AddCors(options =>
                 .AllowAnyMethod()
                 .AllowCredentials()
                 .WithOrigins(
-                    "http://localhost:3000");
+                    "http://localhost:3000",
+                    "https://fitrite-auto-body-parts.netlify.app/",
+                    "https://fitrite.runasp.net");
         });
 });
 
 var app = builder.Build();
 app.UseCors("NextJs");
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
 
 // Configure the HTTP request pipeline.
