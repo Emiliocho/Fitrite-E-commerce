@@ -1,7 +1,10 @@
 CREATE OR ALTER PROC SEGURIDAD.USP_REGISTRAR_USUARIO(
     @i_correo   VARCHAR(50),
     @i_password NVARCHAR(MAX),
-    @i_rolId    INT = 4
+    @i_rolId    INT = 4,
+    @i_createdBy int = 1,
+    @i_createdAt datetime = null,
+    @i_updatedBy int = 1
 )
 AS
 BEGIN
@@ -72,4 +75,7 @@ BEGIN
 END;
 GO
 
-EXEC SEGURIDAD.USP_REGISTRAR_USUARIO 'massiditor@gmail.com','mipassword123';
+DECLARE @FECHA DATETIME = GETDATE();
+EXEC SEGURIDAD.USP_REGISTRAR_USUARIO 'massiditor@gmail.com','mipassword123',1,1,@FECHA,1;
+
+EXEC sp_helptext 'SEGURIDAD.USP_REGISTRAR_USUARIO'
