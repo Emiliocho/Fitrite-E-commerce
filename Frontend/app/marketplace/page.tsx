@@ -630,7 +630,7 @@ export default function MarketplacePage() {
                       className="bg-surface-container-lowest rounded-lg overflow-hidden border border-outline-variant/60 hover:border-outline-variant hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,0,0,0.08)] transition-all duration-300 flex flex-col group"
                     >
                       {/* Product Image Box */}
-                      <div className="relative aspect-square bg-surface-container overflow-hidden">
+                      <Link href="/product_details" className="relative aspect-square bg-surface-container overflow-hidden block">
                         <img
                           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                           data-alt={product.alt}
@@ -653,7 +653,7 @@ export default function MarketplacePage() {
                             )}
                           </div>
                         )}
-                      </div>
+                      </Link>
 
                       {/* Product Details */}
                       <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between">
@@ -661,9 +661,11 @@ export default function MarketplacePage() {
                           <span className="text-[10px] text-outline uppercase tracking-widest font-bold block mb-1">
                             {product.subcategory}
                           </span>
-                          <h3 className="text-sm sm:text-base font-bold text-on-surface mb-3 sm:mb-4 leading-snug line-clamp-2">
-                            {product.name}
-                          </h3>
+                          <Link href="/product_details">
+                            <h3 className="text-sm sm:text-base font-bold text-on-surface hover:text-secondary transition-colors mb-3 sm:mb-4 leading-snug line-clamp-2">
+                              {product.name}
+                            </h3>
+                          </Link>
                         </div>
 
                         <div className="mt-auto pt-3 flex items-end justify-between border-t border-surface-container">
